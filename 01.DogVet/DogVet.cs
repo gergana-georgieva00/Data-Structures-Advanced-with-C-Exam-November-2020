@@ -122,13 +122,12 @@ namespace _01.DogVet
         }
 
         public IEnumerable<Dog> GetDogsInAgeRange(int lo, int hi)
-        {
-            throw new NotImplementedException();
-        }
+            => dogsById.Values.Where(d => d.Age >= lo && d.Age <= hi);
 
         public IEnumerable<Dog> GetAllOrderedByAgeThenByNameThenByOwnerNameAscending()
-        {
-            throw new NotImplementedException();
-        }
+            => dogsById.Values
+            .OrderBy(d => d.Age)
+            .ThenBy(d => d.Name)
+            .ThenBy(d => d.Owner.Name);
     }
 }
