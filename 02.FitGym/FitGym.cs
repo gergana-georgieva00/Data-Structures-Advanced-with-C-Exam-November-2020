@@ -48,9 +48,7 @@ namespace _02.FitGym
         }
 
         public bool Contains(Member member)
-        {
-            throw new NotImplementedException();
-        }
+            => membersByid.ContainsKey(member.Id);
 
         public bool Contains(Trainer trainer)
         {
