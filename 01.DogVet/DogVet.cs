@@ -119,7 +119,7 @@ namespace _01.DogVet
 
         public IEnumerable<Dog> GetAllDogsByAge(int age)
         {
-            if (dogsById.Count == 0)
+            if ((dogsById.Values.Where(d => d.Age == age).ToList().Count) == 0)
             {
                 throw new ArgumentException();
             }
