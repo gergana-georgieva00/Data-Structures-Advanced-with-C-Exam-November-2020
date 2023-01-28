@@ -65,7 +65,12 @@ namespace _01.DogVet
 
         public IEnumerable<Dog> GetDogsByOwner(string ownerId)
         {
-            throw new NotImplementedException();
+            if (!ownersById.ContainsKey(ownerId))
+            {
+                throw new ArgumentException();
+            }
+
+            return ownersById[ownerId].Dogs;
         }
 
         public IEnumerable<Dog> GetDogsByBreed(Breed breed)
