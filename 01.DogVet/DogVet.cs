@@ -22,6 +22,7 @@ namespace _01.DogVet
             }
 
             owner.Dogs.Add(dog);
+            dogsById.Add(dog.Id, dog);
         }
 
         public bool Contains(Dog dog)
@@ -29,7 +30,18 @@ namespace _01.DogVet
 
         public Dog GetDog(string name, string ownerId)
         {
-            throw new NotImplementedException();
+            if (!ownersById.ContainsKey(ownerId))
+            {
+                throw new ArgumentException();
+            }
+
+            var owner = ownersById[ownerId];
+            if (owner is null || owner.Dogs.Find(d => d.Name == name) is null)
+            {
+                throw new ArgumentException();
+            }
+
+            return owner.Dogs.Find(d => d.Name == name);
         }
 
         public Dog RemoveDog(string name, string ownerId)
