@@ -75,7 +75,12 @@ namespace _01.DogVet
 
         public IEnumerable<Dog> GetDogsByBreed(Breed breed)
         {
-            throw new NotImplementedException();
+            if (dogsById.Keys.Count == 0)
+            {
+                throw new ArgumentException();
+            }
+
+            return dogsById.Values.Where(d => d.Breed == breed);
         }
 
         public void Vaccinate(string name, string ownerId)
