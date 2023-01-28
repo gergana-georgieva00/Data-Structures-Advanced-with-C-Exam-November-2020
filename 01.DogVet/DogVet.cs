@@ -99,7 +99,16 @@ namespace _01.DogVet
 
         public void Rename(string oldName, string newName, string ownerId)
         {
-            throw new NotImplementedException();
+            if (!ownersById.ContainsKey(ownerId))
+            {
+                throw new ArgumentException();
+            }
+            if (!ownersById[ownerId].Dogs.Any(d => d.Name == oldName))
+            {
+                throw new ArgumentException();
+            }
+
+            ownersById[ownerId].Dogs.Find(d => d.Name == oldName).Name = newName;
         }
 
         public IEnumerable<Dog> GetAllDogsByAge(int age)
