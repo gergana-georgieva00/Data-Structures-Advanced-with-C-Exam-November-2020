@@ -39,11 +39,11 @@ namespace _02.FitGym
             {
                 membersByid.Add(member.Id, member);
             }
-            else
-            {
-                member.Trainer = trainer;
-                trainer.Members.Add(member);
-            }
+            
+            
+            member.Trainer = trainer;
+            trainer.Members.Add(member);
+            
         }
 
         public bool Contains(Member member)
@@ -103,7 +103,8 @@ namespace _02.FitGym
             GetMembersByTrainerPopularityInRangeSortedByVisitsThenByNames(int lo, int hi)
             => membersByid.Values
             .Where(m => m.Trainer.Popularity >= lo && m.Trainer.Popularity <= hi)
-            .OrderBy(m => m.Visits);
+            .OrderBy(m => m.Visits)
+            .ThenBy(m => m.Name);
 
         public Dictionary<Trainer, HashSet<Member>> 
             GetTrainersAndMemberOrderedByMembersCountThenByPopularity()
