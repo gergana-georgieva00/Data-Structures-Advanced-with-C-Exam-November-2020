@@ -22,6 +22,7 @@ namespace _01.DogVet
             }
 
             owner.Dogs.Add(dog);
+            dog.Owner = owner;
             dogsById.Add(dog.Id, dog);
         }
 
