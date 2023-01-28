@@ -92,9 +92,8 @@ namespace _02.FitGym
             .ThenByDescending(m => m.Name);
 
         public IEnumerable<Trainer> GetTrainersInOrdersOfPopularity()
-        {
-            throw new NotImplementedException();
-        }
+            => trainersById.Values
+            .OrderBy(t => t.Popularity);
 
         public IEnumerable<Member> 
             GetTrainerMembersSortedByRegistrationDateThenByNames(Trainer trainer)
