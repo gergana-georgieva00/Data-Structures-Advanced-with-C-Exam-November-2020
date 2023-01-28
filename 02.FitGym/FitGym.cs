@@ -82,8 +82,8 @@ namespace _02.FitGym
             return member;
         }
 
-        public int MemberCount { get; }
-        public int TrainerCount { get; }
+        public int MemberCount { get => membersByid.Count; }
+        public int TrainerCount { get => trainersById.Count; }
 
         public IEnumerable<Member> 
             GetMembersInOrderOfRegistrationAscendingThenByNamesDescending()
