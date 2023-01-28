@@ -46,7 +46,21 @@ namespace _01.DogVet
 
         public Dog RemoveDog(string name, string ownerId)
         {
-            throw new NotImplementedException();
+            if (!ownersById.ContainsKey(ownerId))
+            {
+                throw new ArgumentException();
+            }
+            var owner = ownersById[ownerId];
+            if (owner is null || owner.Dogs.Find(d => d.Name == name) is null)
+            {
+                throw new ArgumentException();
+            }
+
+            var dog = owner.Dogs.Find(d => d.Name == name);
+            owner.Dogs.Remove(dog);
+            dogsById.Remove(dog.Id);
+
+            return dog;
         }
 
         public IEnumerable<Dog> GetDogsByOwner(string ownerId)
