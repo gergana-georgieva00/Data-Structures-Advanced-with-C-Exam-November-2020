@@ -31,20 +31,18 @@ namespace _02.FitGym
 
         public void Add(Trainer trainer, Member member)
         {
+            if (!trainersById.ContainsKey(trainer.Id) || !(member.Trainer is null))
+            {
+                throw new ArgumentException();
+            }
             if (!membersByid.ContainsKey(member.Id))
             {
                 membersByid.Add(member.Id, member);
             }
             else
             {
-                if (!trainersById.ContainsKey(trainer.Id) || !(membersByid[member.Id].Trainer is null))
-                {
-                    throw new ArgumentException();
-                }
-                else
-                {
-                    membersByid[member.Id].Trainer = trainer;
-                }
+                member.Trainer = trainer;
+                trainer.Members.Add(member);
             }
         }
 
@@ -112,7 +110,7 @@ namespace _02.FitGym
         {
             var dict = new Dictionary<Trainer, HashSet<Member>>();
 
-            foreach (var trainer in trainersById.Values)
+            foreach (var trainer in trainersById.Values.OrderBy(t => t.Members.Count).ThenBy(t => t.Popularity))
             {
                 dict.Add(trainer, new HashSet<Member>());
                 dict[trainer] = trainer.Members;
