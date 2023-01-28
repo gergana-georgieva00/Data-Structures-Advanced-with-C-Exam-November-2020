@@ -85,11 +85,11 @@ namespace _02.FitGym
         public int MemberCount { get => membersByid.Count; }
         public int TrainerCount { get => trainersById.Count; }
 
-        public IEnumerable<Member> 
+        public IEnumerable<Member>
             GetMembersInOrderOfRegistrationAscendingThenByNamesDescending()
-        {
-            throw new NotImplementedException();
-        }
+            => membersByid.Values
+            .OrderBy(m => m.RegistrationDate)
+            .ThenByDescending(m => m.Name);
 
         public IEnumerable<Trainer> GetTrainersInOrdersOfPopularity()
         {
