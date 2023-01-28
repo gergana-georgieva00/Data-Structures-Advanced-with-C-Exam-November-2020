@@ -8,13 +8,13 @@ namespace _01.DogVet
         {
             this.Id = id;
             this.Name = name;
-            //Dogs = new HashSet<Dog>();
+            Dogs = new List<Dog>();
         }
 
         public string Id { get; set; }
 
         public string Name { get; set; }
 
-        //public HashSet<Dog> Dogs { get; set; }
+        public List<Dog> Dogs { get; set; }
     }
 }

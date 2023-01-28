@@ -2,6 +2,7 @@ namespace _01.DogVet
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class DogVet : IDogVet
     {
@@ -11,7 +12,16 @@ namespace _01.DogVet
         public int Size { get => dogsById.Keys.Count; }
         public void AddDog(Dog dog, Owner owner)
         {
-            throw new NotImplementedException();
+            if (dogsById.ContainsKey(dog.Id))
+            {
+                throw new ArgumentException();
+            }
+            if (owner.Dogs.Any(d => d.Name == dog.Name))
+            {
+                throw new ArgumentException();
+            }
+
+            owner.Dogs.Add(dog);
         }
 
         public bool Contains(Dog dog)
