@@ -8,7 +8,7 @@ namespace _01.DogVet
         private Dictionary<string, Dog> dogsById = new Dictionary<string, Dog>();
         private Dictionary<string, Owner> ownersById = new Dictionary<string, Owner>();
 
-        public int Size { get; }
+        public int Size { get => dogsById.Keys.Count; }
         public void AddDog(Dog dog, Owner owner)
         {
             throw new NotImplementedException();
