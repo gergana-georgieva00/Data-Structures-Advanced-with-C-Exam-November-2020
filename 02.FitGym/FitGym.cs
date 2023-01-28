@@ -70,7 +70,16 @@ namespace _02.FitGym
 
         public Member RemoveMember(int id)
         {
-            throw new NotImplementedException();
+            if (!membersByid.ContainsKey(id))
+            {
+                throw new ArgumentException();
+            }
+
+            var member = membersByid[id];
+            membersByid.Remove(id);
+            trainersById.Values.Where(t => t.Members.Contains(member)).ToList().ForEach(t => t.Members.Remove(member));
+
+            return member;
         }
 
         public int MemberCount { get; }
