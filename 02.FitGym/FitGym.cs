@@ -2,6 +2,7 @@ namespace _02.FitGym
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class FitGym : IGym
     {
@@ -55,7 +56,16 @@ namespace _02.FitGym
 
         public Trainer FireTrainer(int id)
         {
-            throw new NotImplementedException();
+            if (!trainersById.ContainsKey(id))
+            {
+                throw new ArgumentException();
+            }
+
+            var trainer = trainersById[id];
+            trainersById.Remove(id);
+            membersByid.Values.Where(m => m.Trainer.Equals(trainer)).ToList().ForEach(m => m.Trainer = null);
+
+            return trainer;
         }
 
         public Member RemoveMember(int id)
