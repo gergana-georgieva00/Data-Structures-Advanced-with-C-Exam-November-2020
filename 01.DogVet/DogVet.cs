@@ -16,12 +16,12 @@ namespace _01.DogVet
             {
                 throw new ArgumentException();
             }
-            if (owner.Dogs.Any(d => d.Name == dog.Name))
+            if (owner.DogsByNames.ContainsKey(dog.Name))
             {
                 throw new ArgumentException();
             }
 
-            owner.Dogs.Add(dog);
+            owner.DogsByNames.Add(dog.Name, dog);
             dog.Owner = owner;
             dogsById.Add(dog.Id, dog);
 
@@ -42,12 +42,12 @@ namespace _01.DogVet
             }
 
             var owner = ownersById[ownerId];
-            if (owner is null || owner.Dogs.Find(d => d.Name == name) is null)
+            if (owner is null || !owner.DogsByNames.ContainsKey(name))
             {
                 throw new ArgumentException();
             }
 
-            return owner.Dogs.Find(d => d.Name == name);
+            return owner.DogsByNames[name];
         }
 
         public Dog RemoveDog(string name, string ownerId)
@@ -57,13 +57,13 @@ namespace _01.DogVet
                 throw new ArgumentException();
             }
             var owner = ownersById[ownerId];
-            if (owner is null || owner.Dogs.Find(d => d.Name == name) is null)
+            if (owner is null || !owner.DogsByNames.ContainsKey(name))
             {
                 throw new ArgumentException();
             }
 
-            var dog = owner.Dogs.Find(d => d.Name == name);
-            owner.Dogs.Remove(dog);
+            var dog = owner.DogsByNames[name];
+            owner.DogsByNames.Remove(name);
             dogsById.Remove(dog.Id);
 
             return dog;
@@ -76,7 +76,7 @@ namespace _01.DogVet
                 throw new ArgumentException();
             }
 
-            return ownersById[ownerId].Dogs;
+            return ownersById[ownerId].DogsByNames.Values;
         }
 
         public IEnumerable<Dog> GetDogsByBreed(Breed breed)
@@ -95,12 +95,12 @@ namespace _01.DogVet
             {
                 throw new ArgumentException();
             }
-            if (!ownersById[ownerId].Dogs.Any(d => d.Name == name))
+            if (!ownersById[ownerId].DogsByNames.ContainsKey(name))
             {
                 throw new ArgumentException();
             }
 
-            ownersById[ownerId].Dogs.Find(d => d.Name == name).Vaccines++;
+            ownersById[ownerId].DogsByNames[name].Vaccines++;
         }
 
         public void Rename(string oldName, string newName, string ownerId)
@@ -109,12 +109,16 @@ namespace _01.DogVet
             {
                 throw new ArgumentException();
             }
-            if (!ownersById[ownerId].Dogs.Any(d => d.Name == oldName))
+            if (!ownersById[ownerId].DogsByNames.ContainsKey(oldName))
             {
                 throw new ArgumentException();
             }
 
-            ownersById[ownerId].Dogs.Find(d => d.Name == oldName).Name = newName;
+            var dog = ownersById[ownerId].DogsByNames[oldName];
+            dog.Name = newName;
+            ownersById[ownerId].DogsByNames.Remove(oldName);
+            //ownersById[ownerId].DogsByNames[oldName].Name = newName;
+            ownersById[ownerId].DogsByNames.Add(newName, dog);
         }
 
         public IEnumerable<Dog> GetAllDogsByAge(int age)
