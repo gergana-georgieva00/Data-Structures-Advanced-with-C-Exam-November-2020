@@ -110,7 +110,15 @@ namespace _02.FitGym
         public Dictionary<Trainer, HashSet<Member>> 
             GetTrainersAndMemberOrderedByMembersCountThenByPopularity()
         {
-            throw new NotImplementedException();
+            var dict = new Dictionary<Trainer, HashSet<Member>>();
+
+            foreach (var trainer in trainersById.Values)
+            {
+                dict.Add(trainer, new HashSet<Member>());
+                dict[trainer] = trainer.Members;
+            }
+
+            return dict;
         }
     }
 }

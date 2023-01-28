@@ -9,6 +9,7 @@ namespace _02.FitGym
             this.Id = id;
             this.Name = name;
             this.Popularity = popularity;
+            Members = new HashSet<Member>();
         }
 
         public int Id { get; set; }
@@ -16,6 +17,6 @@ namespace _02.FitGym
         public string Name { get; set; }
 
         public int Popularity { get; set; }
-        public List<Member> Members { get; set; }
+        public HashSet<Member> Members { get; set; }
     }
 }
