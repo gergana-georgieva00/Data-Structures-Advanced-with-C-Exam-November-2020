@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace _01.DogVet
 {
     public class Owner
@@ -6,10 +8,13 @@ namespace _01.DogVet
         {
             this.Id = id;
             this.Name = name;
+            //Dogs = new HashSet<Dog>();
         }
 
         public string Id { get; set; }
 
         public string Name { get; set; }
+
+        //public HashSet<Dog> Dogs { get; set; }
     }
 }

@@ -5,6 +5,9 @@ namespace _01.DogVet
 
     public class DogVet : IDogVet
     {
+        private Dictionary<string, Dog> dogsById = new Dictionary<string, Dog>();
+        private Dictionary<string, Owner> ownersById = new Dictionary<string, Owner>();
+
         public int Size { get; }
         public void AddDog(Dog dog, Owner owner)
         {
