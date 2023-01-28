@@ -30,7 +30,21 @@ namespace _02.FitGym
 
         public void Add(Trainer trainer, Member member)
         {
-            throw new NotImplementedException();
+            if (!membersByid.ContainsKey(member.Id))
+            {
+                membersByid.Add(member.Id, member);
+            }
+            else
+            {
+                if (!trainersById.ContainsKey(trainer.Id) || !(membersByid[member.Id].Trainer is null))
+                {
+                    throw new ArgumentException();
+                }
+                else
+                {
+                    membersByid[member.Id].Trainer = trainer;
+                }
+            }
         }
 
         public bool Contains(Member member)
