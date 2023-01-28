@@ -25,9 +25,7 @@ namespace _01.DogVet
         }
 
         public bool Contains(Dog dog)
-        {
-            throw new NotImplementedException();
-        }
+            => dogsById.ContainsKey(dog.Id);
 
         public Dog GetDog(string name, string ownerId)
         {
