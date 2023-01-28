@@ -5,9 +5,17 @@ namespace _02.FitGym
 
     public class FitGym : IGym
     {
+        private Dictionary<int, Member> membersByid = new Dictionary<int, Member>();
+        private Dictionary<int, Trainer> trainersById = new Dictionary<int, Trainer>();
+
         public void AddMember(Member member)
         {
-            throw new NotImplementedException();
+            if (membersByid.ContainsKey(member.Id))
+            {
+                throw new ArgumentException();
+            }
+
+            membersByid.Add(member.Id, member);
         }
 
         public void HireTrainer(Trainer trainer)

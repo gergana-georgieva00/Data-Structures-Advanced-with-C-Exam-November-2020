@@ -42,12 +42,14 @@ namespace _01.DogVet
             }
 
             var owner = ownersById[ownerId];
-            if (owner is null || !owner.DogsByNames.ContainsKey(name))
+            if (owner != null && owner.DogsByNames.TryGetValue(name, out var dog))
+            {
+                return dog;
+            }
+            else
             {
                 throw new ArgumentException();
             }
-
-            return owner.DogsByNames[name];
         }
 
         public Dog RemoveDog(string name, string ownerId)
