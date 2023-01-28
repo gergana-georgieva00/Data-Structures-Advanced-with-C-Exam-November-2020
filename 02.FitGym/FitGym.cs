@@ -20,7 +20,12 @@ namespace _02.FitGym
 
         public void HireTrainer(Trainer trainer)
         {
-            throw new NotImplementedException();
+            if (trainersById.ContainsKey(trainer.Id))
+            {
+                throw new ArgumentException();
+            }
+
+            trainersById.Add(trainer.Id, trainer);
         }
 
         public void Add(Trainer trainer, Member member)
