@@ -101,11 +101,11 @@ namespace _02.FitGym
             .OrderBy(m => m.RegistrationDate)
             .ThenBy(m => m.Name);
 
-        public IEnumerable<Member> 
+        public IEnumerable<Member>
             GetMembersByTrainerPopularityInRangeSortedByVisitsThenByNames(int lo, int hi)
-        {
-            throw new NotImplementedException();
-        }
+            => membersByid.Values
+            .Where(m => m.Trainer.Popularity >= lo && m.Trainer.Popularity <= hi)
+            .OrderBy(m => m.Visits);
 
         public Dictionary<Trainer, HashSet<Member>> 
             GetTrainersAndMemberOrderedByMembersCountThenByPopularity()
