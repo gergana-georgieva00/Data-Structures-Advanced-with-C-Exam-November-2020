@@ -113,7 +113,12 @@ namespace _01.DogVet
 
         public IEnumerable<Dog> GetAllDogsByAge(int age)
         {
-            throw new NotImplementedException();
+            if (dogsById.Count == 0)
+            {
+                throw new ArgumentException();
+            }
+
+            return dogsById.Values.Where(d => d.Age == age);
         }
 
         public IEnumerable<Dog> GetDogsInAgeRange(int lo, int hi)
