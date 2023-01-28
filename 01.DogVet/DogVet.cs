@@ -85,7 +85,16 @@ namespace _01.DogVet
 
         public void Vaccinate(string name, string ownerId)
         {
-            throw new NotImplementedException();
+            if (!ownersById.ContainsKey(ownerId))
+            {
+                throw new ArgumentException();
+            }
+            if (!ownersById[ownerId].Dogs.Any(d => d.Name == name))
+            {
+                throw new ArgumentException();
+            }
+
+            ownersById[ownerId].Dogs.Find(d => d.Name == name).Vaccines++;
         }
 
         public void Rename(string oldName, string newName, string ownerId)
